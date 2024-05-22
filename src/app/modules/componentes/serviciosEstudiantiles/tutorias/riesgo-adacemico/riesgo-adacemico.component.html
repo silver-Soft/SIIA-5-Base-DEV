@@ -1,0 +1,219 @@
+<mat-card class="card-margin">
+    <mat-card class="card-margin" style="padding:0px;">
+        <p class="titulo_contenido">Estatus de riesgo</p>
+    </mat-card>   
+    
+    <mat-card class="card-margin">
+        <mat-card-title>Buscar estatus de riesgo por periodo y programa educativo</mat-card-title>
+        <div class="card-buscarSolicitudesMovilidad">
+            <form [formGroup]="solicitudesFormGroup" (ngSubmit)="buscarListaRiesgo(f)" #f="ngForm" style="width: 100%;">
+                <div>
+                  <div class="filter-grid-block">
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                      <mat-label>Periodo</mat-label>
+                      <mat-select formControlName="periodo">
+                        <mat-option [value]="periodo.strIdPeriodo" *ngFor="let periodo of periodosList">
+                          {{periodo.strDsPeriodoTemporada}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="revisarError('periodo', 'required')">
+                        Seleccione un periodo
+                      </mat-error>
+                    </mat-form-field>
+              
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                      <mat-label>Programa</mat-label>
+                      <mat-select formControlName="programa">
+                        <mat-option [value]="programa.intIdProgramaCampus" *ngFor="let programa of programasList">
+                          {{programa.strDsProgramaEducativo}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="revisarError('programa', 'required')">
+                        Seleccione un programa
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+              
+                  <mat-card-actions
+                    [style]="esDispositivoMovil ? 'display: grid; grid-template-columns: repeat(1, 1fr); padding: 10px; row-gap: 10px; justify-content: center; align-items: center;' : 'display: flex; justify-content: right; align-items: center; padding: 0px; margin: 0px;'">
+                    <button mat-raised-button color="primary" type="submit" matTooltip="Buscar" matTooltipPosition="above">
+                      Buscar <mat-icon>search</mat-icon>
+                    </button>
+                  </mat-card-actions>
+                </div>
+              </form>
+        </div>        
+    </mat-card>
+    <br>
+    <div class="filtrar-tabla table_overflowX">
+        <h2 style="margin-top: 1rem;margin-bottom: 1rem; text-align: center; width: 100%; font-size: x-large; font-weight: bold;">Listado de riesgo</h2>
+        <mat-form-field [style]="esDispositivoMovil?'margin: 0px 30px':'margin-right: 20px;'">
+        <input matInput (keyup)="filtrarSolicitudes($event)" placeholder="Buscar">
+        </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8 table_overflowX">
+        <table mat-table [dataSource]="listaRiesgo">
+
+            <ng-container matColumnDef="strTutor">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Tutor</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strTutor}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="strTutorado">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Tutorado</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strTutorado}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="intSemestre">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Semestre</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.intSemestre}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="intNmMaterias">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Número de materias</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.intNmMaterias}}</p>
+                    </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="strRecurse">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Recursa</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strRecurse}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="strBajoPromedio">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Bajo promedio</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strBajoPromedio}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="strAltaReprobacion">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Alta reprobación</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strAltaReprobacion}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="strRezago">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Rezago</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strRezago}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="strCondicionado">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Condicionado</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strRezstrCondicionadoago}}</p>
+                    </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="strSituacionRiesgo">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Situación de riesgo</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.strSituacionRiesgo}}</p>
+                    </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="intPromedioAnterior">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Promedio anterior</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.intPromedioAnterior}}</p>
+                    </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="intPromedio">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Promedio</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.intPromedio}}</p>
+                    </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="intNmMateriasAnterior">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Num. Materias ant</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.intNmMateriasAnterior}}</p>
+                    </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="intMateriasBaja">
+                <th mat-header-cell *matHeaderCellDef class="table-th">Materias en baja</th>
+                <td mat-cell *matCellDef="let element" [style.background-color]="element.strColor ? element.strColor : ''">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>{{element.intMateriasBaja}}</p>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Options">
+                <th mat-header-cell *matHeaderCellDef class="table-th">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        <p>Opciónes</p>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" [class]="element.rowColor?'table-td-color':'table-td'">
+                    <div style="display:flex; width: 100%; justify-content: center;">
+                        
+                        <button [matMenuTriggerFor]="menuUserBtn"
+                            style="padding-right: 0px;"
+                            mat-raised-button color="primary"                               
+                            type="button"
+                            aria-label="Acciones"
+                            matTooltip="Opciónes"
+                            matTooltipPosition="right">
+                            <div style="display: grid; grid-template-columns: repeat(2,1fr); justify-items: center; align-items: center;">
+                                Opciónes
+                                <mat-icon>more_vert</mat-icon>
+                            </div>                                  
+                        </button>
+                        <mat-menu #menuUserBtn="matMenu">
+                            
+                        </mat-menu>
+                    </div>
+                </td>
+            </ng-container>           
+
+            <tr mat-header-row *matHeaderRowDef="columnas2"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas2;"></tr>
+        </table>
+        <mat-paginator #paginator [pageSizeOptions]="[10, 20]"
+                        showFirstLastButtons
+                        aria-label="Seleccione página">
+        </mat-paginator>
+    </div>
+</mat-card>

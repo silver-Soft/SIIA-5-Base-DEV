@@ -1,0 +1,213 @@
+<!-- menu lenguaje -->
+<mat-menu #languaje="matMenu">
+    <mat-option value="es" (click)="changeLang('es')">{{ 'template.header.idiomaEspañol' | translate }}</mat-option>
+    <mat-option value="en" (click)="changeLang('en')">{{ 'template.header.idiomaIngles' | translate }}</mat-option>
+    <mat-option value="jp" (click)="changeLang('jp')" *ngIf="false">JAP</mat-option>
+</mat-menu>
+<!-- cabecera -->
+<div class="background">
+    <img src="https://uatx.mx/siia/home/LogoSIIA5.png" class="img-responsive" style="max-width: 350px;">
+    <div class="imageBack"></div>
+    <div class="centrado" *ngIf="!esDispositivoMovil">
+
+        <ng-container *ngIf="this._loginUsuarioService.obtenerToken()">
+
+            <button mat-icon-button [matMenuTriggerFor]="languaje">
+                <mat-icon>language</mat-icon>
+            </button>
+
+            <a mat-button [matMenuTriggerFor]="menu">
+                <mat-icon color="secondary">account_circle</mat-icon>
+
+                {{this._loginUsuarioService.obtenerNombreCompleto()}}
+                <mat-icon color="secondary">arrow_drop_down</mat-icon>
+            </a>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="CerrarSesion()">
+                    <mat-icon>logout</mat-icon>
+                    <span>{{ 'template.header.salir' | translate }}</span>
+                </button>
+            </mat-menu>
+
+        </ng-container>
+
+        <!-- cabecera para usuarios no logueados -->
+        <ng-container *ngIf="!this._loginUsuarioService.obtenerToken()">
+
+            <button mat-icon-button [matMenuTriggerFor]="languaje">
+                <mat-icon class="mat-18">language</mat-icon>
+            </button>
+
+            <ng-container>
+                <button mat-button (click)="click_iniciarSesion()">
+                    <mat-icon>login</mat-icon> {{ 'template.header.iniciarSesion'| translate }}
+                </button>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+
+<!-- toolbar --><!--Menu examples https://material.angular.io/components/menu/examples-->
+<mat-toolbar [style]="esDispositivoMovil? '':'justify-content: center; height: 35px;'">
+    <ng-container *ngIf="this.esDispositivoMovil">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+            <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+        </button>
+    </ng-container>
+
+    <ng-container *ngIf="!esDispositivoMovil && _loginUsuarioService.obtenerToken()">
+        <button mat-button class="navButton" [style]="" [routerLink]="['/inicio']"
+            (click)="bindSelected(0,0)">Inicio</button>
+    </ng-container>
+
+    <!-- servicios universitarios -->
+    <ng-container *ngIf="!esDispositivoMovil && _loginUsuarioService.obtenerToken() && tienePrivilegio('TODO')">
+        <button mat-button [matMenuTriggerFor]="serviciosUniversitarios" class="navButton"
+            [class]="posSelectButton ==1? 'navButtonhover':'navButton'">
+            Servicios escolares
+        </button>
+
+        <mat-menu #serviciosUniversitarios="matMenu">
+            <button [class]="posSelectButton ==1 && selectedSubButton == 1? 'bindButton':''" mat-menu-item
+                [matMenuTriggerFor]="btn_secundarios1" *ngIf="tienePrivilegio('TODO')">Carpeta electrónica de tutorías</button>            
+        </mat-menu>
+
+        <mat-menu #btn_secundarios1="matMenu">
+            <button mat-menu-item [routerLink]="['tutorias-riesgoAcademico']" (click)="bindSelected(1,1)" *ngIf="tienePrivilegio('TODO')">
+                Riesgo académico de tutorados
+            </button>
+        </mat-menu>
+
+        <!--mat-menu #btn_secundarios2="matMenu">
+            <button mat-menu-item *ngIf="tienePrivilegio('TODO')" [routerLink]="['#']"
+                (click)="bindSelected(1, 2)">Boton terciario 1
+            </button>
+        </mat-menu>
+
+        <mat-menu #btn_secundarios3="matMenu">
+            <button mat-menu-item *ngIf="tienePrivilegio('TODO')" [routerLink]="['#']"
+                (click)="bindSelected(1, 3)">Boton terciario 1
+            </button>
+            <button mat-menu-item *ngIf="tienePrivilegio('TODO')" [routerLink]="['#']"
+                (click)="bindSelected(1, 3)">Boton terciario 2
+            </button>
+        </mat-menu-->
+    </ng-container>
+
+    <!--COMO NAVEGAR CON routerLink-->
+    <!--ng-container *ngIf="!esDispositivoMovil && _loginUsuarioService.obtenerToken() && tienePrivilegio('Servicios')">
+        <button mat-button [matMenuTriggerFor]="servicios" class="navButton"
+            [class]="posSelectButton ==2? 'navButtonhover':'navButton'">
+            Servicios
+        </button>
+        <mat-menu #servicios="matMenu">
+            <button [class]="posSelectButton ==2 && selectedSubButton==1?'bindButton':''" mat-menu-item
+                [routerLink]="['#']" (click)="bindSelected(2,1)"
+                *ngIf="tienePrivilegio('SolicitarServicio')">Solicitar ticket de ayuda</button>
+        </mat-menu>
+    </ng-container-->
+
+
+</mat-toolbar>
+
+<!-- menu lateral -->
+<mat-sidenav-container>
+    <!-- contenido del menu lateral -->
+    <mat-sidenav #sidenav="matSidenav" mode="over" align="start" style="height: 90%; width: 90%;">
+
+        <ng-container *ngIf="this._loginUsuarioService.obtenerToken()">
+            <h4 class="name">{{this._loginUsuarioService.obtenerNombreCompleto()}}</h4>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item class="menu-button" (click)="closeMenu()" [routerLink]="['/inicio']">
+                <mat-icon>home</mat-icon>
+                <span class="boton-primario">Inicio</span>
+            </button>
+
+            <mat-expansion-panel *ngIf="_loginUsuarioService.obtenerToken() && tienePrivilegio('TODO')"
+                (opened)="panelOpenState1 = true" style="background-color: transparent; padding-right: 5px;"
+                (closed)="panelOpenState1 = false">
+                <mat-expansion-panel-header class="arrowColor" style="padding: 0px;">
+                    <mat-panel-title class="boton-primario">
+                        <mat-icon>class</mat-icon>
+                        <span>Boton primario</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-expansion-panel-body class="custom-panel-body">
+                    <mat-expansion-panel (opened)="panelOpenState2 = true" style="background-color: transparent"
+                        class="parametersPanel" (closed)="panelOpenState2 = false">
+                        <mat-expansion-panel-header class="arrowColor" style="padding: 0px;"
+                            *ngIf="tienePrivilegio('TODO')">
+                            <mat-panel-description class="boton-secundario-panel">
+                                <span>● Boton secundario</span>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-expansion-panel-body class="custom-panel-body">
+                            <button mat-menu-item (click)="closeMenu()" *ngIf="tienePrivilegio('TODO')"
+                                [routerLink]="['#']" class="boton-terciario">
+                                <span>Boton terciario</span>
+                            </button>
+                        </mat-expansion-panel-body>
+                    </mat-expansion-panel>
+                </mat-expansion-panel-body>
+            </mat-expansion-panel>
+
+            <!--SERVICIOS-->
+            <mat-expansion-panel *ngIf="_loginUsuarioService.obtenerToken() && tienePrivilegio('TODO')"
+                (opened)="panelOpenState1 = true" style="background-color: transparent; padding-right: 5px;"
+                (closed)="panelOpenState1 = false">
+                <mat-expansion-panel-header class="arrowColor" style="padding: 0px;">
+                    <mat-panel-title class="boton-primario">
+                        <mat-icon>class</mat-icon>
+                        Servicios
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-expansion-panel-body class="custom-panel-body" *ngIf="tienePrivilegio('TODO')"
+                    [routerLink]="['#']">
+                    <button mat-menu-item class="menu-button" (click)="closeMenu()">
+                        <span class="boton-secundario">● Solicitar ticket de ayuda</span>
+                    </button>
+                </mat-expansion-panel-body>
+            </mat-expansion-panel>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item class="menu-button" [matMenuTriggerFor]="languaje">
+                <mat-icon>language</mat-icon>
+                <span class="boton-primario">{{ 'template.header.elegirIdioma' | translate }}</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item class="menu-button" (click)="CerrarSesion()" routerLink="/login">
+                <mat-icon>logout</mat-icon>
+                <span class="boton-primario">{{ 'template.header.salir' | translate }}</span>
+            </button>
+        </ng-container>
+
+        <!-- menu para usuarios no logueados -->
+        <ng-container *ngIf="!this._loginUsuarioService.obtenerToken()">
+
+            <button mat-menu-item class="menu-button" (click)="click_iniciarSesion()">
+                <mat-icon>login</mat-icon>
+                <span class="boton-primario">{{ 'template.header.iniciarSesion' | translate }}</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item class="menu-button" [matMenuTriggerFor]="languaje">
+                <mat-icon>language</mat-icon>
+                <span class="boton-primario">{{ 'template.header.elegirIdioma' | translate }}</span>
+            </button>
+        </ng-container>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="body">
+            <router-outlet></router-outlet>
+        </div>
+        <app-pie-pagina></app-pie-pagina>
+    </mat-sidenav-content>
+</mat-sidenav-container>
