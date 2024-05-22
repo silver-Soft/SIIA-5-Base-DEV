@@ -133,7 +133,7 @@
                 <mat-expansion-panel-header class="arrowColor" style="padding: 0px;">
                     <mat-panel-title class="boton-primario">
                         <mat-icon>class</mat-icon>
-                        <span>Boton primario</span>
+                        <span>Servicios escolares</span>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-expansion-panel-body class="custom-panel-body">
@@ -142,37 +142,19 @@
                         <mat-expansion-panel-header class="arrowColor" style="padding: 0px;"
                             *ngIf="tienePrivilegio('TODO')">
                             <mat-panel-description class="boton-secundario-panel">
-                                <span>● Boton secundario</span>
+                                <span>● Carpeta electrónica de tutorías</span>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-expansion-panel-body class="custom-panel-body">
                             <button mat-menu-item (click)="closeMenu()" *ngIf="tienePrivilegio('TODO')"
-                                [routerLink]="['#']" class="boton-terciario">
-                                <span>Boton terciario</span>
+                                [routerLink]="['tutorias-riesgoAcademico']" class="boton-terciario">
+                                <span>Riesgo académico de tutorados</span>
                             </button>
                         </mat-expansion-panel-body>
                     </mat-expansion-panel>
                 </mat-expansion-panel-body>
             </mat-expansion-panel>
-
-            <!--SERVICIOS-->
-            <mat-expansion-panel *ngIf="_loginUsuarioService.obtenerToken() && tienePrivilegio('TODO')"
-                (opened)="panelOpenState1 = true" style="background-color: transparent; padding-right: 5px;"
-                (closed)="panelOpenState1 = false">
-                <mat-expansion-panel-header class="arrowColor" style="padding: 0px;">
-                    <mat-panel-title class="boton-primario">
-                        <mat-icon>class</mat-icon>
-                        Servicios
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-expansion-panel-body class="custom-panel-body" *ngIf="tienePrivilegio('TODO')"
-                    [routerLink]="['#']">
-                    <button mat-menu-item class="menu-button" (click)="closeMenu()">
-                        <span class="boton-secundario">● Solicitar ticket de ayuda</span>
-                    </button>
-                </mat-expansion-panel-body>
-            </mat-expansion-panel>
-
+            
             <mat-divider></mat-divider>
 
             <button mat-menu-item class="menu-button" [matMenuTriggerFor]="languaje">
