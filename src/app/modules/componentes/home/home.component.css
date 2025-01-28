@@ -72,7 +72,7 @@
     height:15rem;
     margin-top: 0rem;
     position: fixed;
-    left: -31rem;
+    left: -33rem;
     transition: all .7s;   
 }
 
@@ -84,7 +84,7 @@
 }
 
 .mostrado {
-    transform: translateX(31rem); 
+    transform: translateX(33rem); 
 }
 
 canvas#canvas {

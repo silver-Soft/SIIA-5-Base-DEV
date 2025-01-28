@@ -206,7 +206,7 @@ imagen: string="assets/imagenes/cumpleaniosSIIA.png"
         confetti.create(canvasElement, {
             resize: true,
             useWorker: true
-        })({ particleCount: 500, spread: 160 });
+        })({ particleCount: 500, spread: 130 });
     } else {
         console.error('El elemento de lienzo no se encontró o no es un elemento de lienzo HTML.');
     }

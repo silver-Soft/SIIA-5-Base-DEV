@@ -71,11 +71,13 @@
 
         <mat-menu #serviciosUniversitarios="matMenu">
             <button [class]="posSelectButton ==1 && selectedSubButton == 1? 'bindButton':''" mat-menu-item
-                [matMenuTriggerFor]="btn_secundarios1" *ngIf="tienePrivilegio('TODO')">Carpeta electrónica de tutorías</button>            
+                [matMenuTriggerFor]="btn_secundarios1" *ngIf="tienePrivilegio('TODO')">Carpeta electrónica de
+                tutorías</button>
         </mat-menu>
 
         <mat-menu #btn_secundarios1="matMenu">
-            <button mat-menu-item [routerLink]="['tutorias-riesgoAcademico']" (click)="bindSelected(1,1)" *ngIf="tienePrivilegio('TODO')">
+            <button mat-menu-item [routerLink]="['tutorias-riesgoAcademico']" (click)="bindSelected(1,1)"
+                *ngIf="tienePrivilegio('TODO')">
                 Riesgo académico de tutorados
             </button>
         </mat-menu>
@@ -154,7 +156,7 @@
                     </mat-expansion-panel>
                 </mat-expansion-panel-body>
             </mat-expansion-panel>
-            
+
             <mat-divider></mat-divider>
 
             <button mat-menu-item class="menu-button" [matMenuTriggerFor]="languaje">
