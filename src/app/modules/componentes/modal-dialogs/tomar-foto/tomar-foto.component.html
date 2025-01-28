@@ -1,0 +1,17 @@
+<div>   
+    <div class="vista-previa">
+        <div style="grid-column: 1 /3; line-height: 0;">
+            <video id="video" #video width="100%" autoplay></video>
+        </div>                                    
+    </div>
+    <div style="position: fixed; bottom: 150px; width: 40%; display: flex; justify-content: center;">
+        
+        <button mat-fab color="transparent" 
+            type="button" 
+            aria-label="Capture image" 
+            (click)="captureImage()">
+            <mat-icon style="color: white; font-size: xxx-large; height: 50px; width: 50px;">camera</mat-icon>
+        </button>
+
+    </div>  
+</div>

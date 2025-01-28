@@ -39,11 +39,11 @@
                 <mat-icon class="mat-18">language</mat-icon>
             </button>
 
-            <ng-container>
+            <!--ng-container>
                 <button mat-button (click)="click_iniciarSesion()">
                     <mat-icon>login</mat-icon> {{ 'template.header.iniciarSesion'| translate }}
                 </button>
-            </ng-container>
+            </ng-container-->
         </ng-container>
     </div>
 </div>
@@ -63,53 +63,23 @@
     </ng-container>
 
     <!-- servicios universitarios -->
-    <ng-container *ngIf="!esDispositivoMovil && _loginUsuarioService.obtenerToken() && tienePrivilegio('TODO')">
+    <ng-container *ngIf="!esDispositivoMovil && _loginUsuarioService.obtenerToken() && tienePrivilegio('ServiciosUniversitarios')">
         <button mat-button [matMenuTriggerFor]="serviciosUniversitarios" class="navButton"
             [class]="posSelectButton ==1? 'navButtonhover':'navButton'">
-            Servicios escolares
+            Servicios universitarios
         </button>
 
         <mat-menu #serviciosUniversitarios="matMenu">
             <button [class]="posSelectButton ==1 && selectedSubButton == 1? 'bindButton':''" mat-menu-item
-                [matMenuTriggerFor]="btn_secundarios1" *ngIf="tienePrivilegio('TODO')">Carpeta electrónica de tutorías</button>            
+                [matMenuTriggerFor]="btn_secundarios1" *ngIf="tienePrivilegio('ConstanciasEventos')">Eventos</button>            
         </mat-menu>
 
         <mat-menu #btn_secundarios1="matMenu">
-            <button mat-menu-item [routerLink]="['tutorias-riesgoAcademico']" (click)="bindSelected(1,1)" *ngIf="tienePrivilegio('TODO')">
-                Riesgo académico de tutorados
+            <button mat-menu-item [routerLink]="['asistenciaEventoExterno']" (click)="bindSelected(1,1)" *ngIf="(tienePrivilegio('AdministrarEventosExternos')&&tienePrivilegio('ChecarEventosExternos'))">
+                Registro de eventos/imprimir constancias
             </button>
         </mat-menu>
-
-        <!--mat-menu #btn_secundarios2="matMenu">
-            <button mat-menu-item *ngIf="tienePrivilegio('TODO')" [routerLink]="['#']"
-                (click)="bindSelected(1, 2)">Boton terciario 1
-            </button>
-        </mat-menu>
-
-        <mat-menu #btn_secundarios3="matMenu">
-            <button mat-menu-item *ngIf="tienePrivilegio('TODO')" [routerLink]="['#']"
-                (click)="bindSelected(1, 3)">Boton terciario 1
-            </button>
-            <button mat-menu-item *ngIf="tienePrivilegio('TODO')" [routerLink]="['#']"
-                (click)="bindSelected(1, 3)">Boton terciario 2
-            </button>
-        </mat-menu-->
     </ng-container>
-
-    <!--COMO NAVEGAR CON routerLink-->
-    <!--ng-container *ngIf="!esDispositivoMovil && _loginUsuarioService.obtenerToken() && tienePrivilegio('Servicios')">
-        <button mat-button [matMenuTriggerFor]="servicios" class="navButton"
-            [class]="posSelectButton ==2? 'navButtonhover':'navButton'">
-            Servicios
-        </button>
-        <mat-menu #servicios="matMenu">
-            <button [class]="posSelectButton ==2 && selectedSubButton==1?'bindButton':''" mat-menu-item
-                [routerLink]="['#']" (click)="bindSelected(2,1)"
-                *ngIf="tienePrivilegio('SolicitarServicio')">Solicitar ticket de ayuda</button>
-        </mat-menu>
-    </ng-container-->
-
-
 </mat-toolbar>
 
 <!-- menu lateral -->
@@ -133,22 +103,22 @@
                 <mat-expansion-panel-header class="arrowColor" style="padding: 0px;">
                     <mat-panel-title class="boton-primario">
                         <mat-icon>class</mat-icon>
-                        <span>Servicios escolares</span>
+                        <span>Servicios universitarios</span>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-expansion-panel-body class="custom-panel-body">
                     <mat-expansion-panel (opened)="panelOpenState2 = true" style="background-color: transparent"
                         class="parametersPanel" (closed)="panelOpenState2 = false">
                         <mat-expansion-panel-header class="arrowColor" style="padding: 0px;"
-                            *ngIf="tienePrivilegio('TODO')">
+                            *ngIf="tienePrivilegio('ConstanciasEventos')">
                             <mat-panel-description class="boton-secundario-panel">
-                                <span>● Carpeta electrónica de tutorías</span>
+                                <span>● Eventos</span>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-expansion-panel-body class="custom-panel-body">
-                            <button mat-menu-item (click)="closeMenu()" *ngIf="tienePrivilegio('TODO')"
-                                [routerLink]="['tutorias-riesgoAcademico']" class="boton-terciario">
-                                <span>Riesgo académico de tutorados</span>
+                            <button mat-menu-item (click)="closeMenu()" *ngIf="(tienePrivilegio('AdministrarEventosExternos')&&tienePrivilegio('ChecarEventosExternos'))"
+                                [routerLink]="['asistenciaEventoExterno']" class="boton-terciario">
+                                <span>Registro de eventos/imprimir constancias</span>
                             </button>
                         </mat-expansion-panel-body>
                     </mat-expansion-panel>
@@ -173,10 +143,10 @@
         <!-- menu para usuarios no logueados -->
         <ng-container *ngIf="!this._loginUsuarioService.obtenerToken()">
 
-            <button mat-menu-item class="menu-button" (click)="click_iniciarSesion()">
+            <!--button mat-menu-item class="menu-button" (click)="click_iniciarSesion()">
                 <mat-icon>login</mat-icon>
                 <span class="boton-primario">{{ 'template.header.iniciarSesion' | translate }}</span>
-            </button>
+            </button-->
 
             <mat-divider></mat-divider>
 

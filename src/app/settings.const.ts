@@ -2,8 +2,12 @@ import { HttpHeaders } from '@angular/common/http';
 
 export class AppSettings {
 
-    public static env ="siiadsyti"//siiadsyti | siia
-    public static API_ENDPOINT = 'https://'+AppSettings.env+'.uatx.mx:8743';
+    private static env ="siiadsyti"//siia
+    public static API_ENDPOINT = 'https://'+this.env+'.uatx.mx:8743';
+    public static API_ENDPOINT_EVENTOS_EXTERNOS = 'https://'+this.env+'.uatx.mx:8743/siia-back-eventosexternos-0.0.1-SNAPSHOT';
+    
+    public static API_ENDPOINT_MOVILES ='https://'+this.env+'.uatx.mx:8743/SIIAMOVIL'
+    
     public static API_ENDPOINT_AVISOS= 'https://'+AppSettings.env+'.uatx.mx:8743/siia-back-avisos-0.0.1-SNAPSHOT'
     public static API_ENDPOINT_TUTORIAS = 'https://'+AppSettings.env+'.uatx.mx:8743/siia-back-tutorias-tesis-0.0.1-SNAPSHOT';
     

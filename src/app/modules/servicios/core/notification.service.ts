@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppSettings } from 'src/app/settings.const';
 import { Notification } from '../../classes/Notification';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertPosition } from 'sweetalert2';
 
 
 @Injectable({
@@ -13,10 +13,10 @@ export class NotificationService {
 
   constructor() { }
   //NOTIFICACIONES DE SWEET ALERT PARA PRUEBA 
-  public pushSuccess(title:string, time?:number){
+  public pushSuccess(title:string, time?:number, position?:SweetAlertPosition){
     const Toast = Swal.mixin({
       toast: true,
-      position: 'top-right',
+      position: position?position:'top-right',
       timer: time? time: 5000,
       timerProgressBar: true,
     })
@@ -59,11 +59,11 @@ export class NotificationService {
       }
     }) 
   }
-  public pushAlert(title:any){
+  public pushAlert(title:any, time?:number){
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
-      timer: 5000,
+      timer: time? time: 5000,
       timerProgressBar: true,
     })
     Toast.fire({
@@ -140,12 +140,12 @@ export class NotificationService {
     }
   }
 
-  public pedirConfirmacion(titulo:string, contenido:string){
+  public pedirConfirmacion(titulo:string, contenido:string, showCancelButton:boolean){
     return new Promise((resolve, reject) =>{
       Swal.fire({
         title: titulo,
         text: contenido,
-        showCancelButton: true,
+        showCancelButton: showCancelButton,
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar',
       }).then(result => {

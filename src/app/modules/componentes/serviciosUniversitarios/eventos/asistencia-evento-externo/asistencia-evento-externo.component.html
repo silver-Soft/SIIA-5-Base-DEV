@@ -1,0 +1,18 @@
+<div style="text-align:center">
+    <h1>Registrar asistencia</h1>
+  </div>
+  <button mat-raised-button (click)="test()">Probar</button>
+  <div class="scanner-container">
+    <zxing-scanner
+        class="scanner"
+        #scanner
+        [enable]="true"
+        (scanSuccess)="onCodeResult($event)"
+    ></zxing-scanner>
+  </div>  
+  
+  <div *ngIf="qrResultString" class="info-asistente">
+    <h2 style="text-align: center;">Asistente registrado:</h2>
+    <p style="text-align: center;">{{ qrResultString }}</p>    
+  </div>
+  

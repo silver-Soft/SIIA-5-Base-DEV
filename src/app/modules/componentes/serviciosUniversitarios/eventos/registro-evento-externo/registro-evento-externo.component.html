@@ -1,0 +1,180 @@
+<mat-card class="card-margin">
+    <mat-card class="card-margin" style="padding:0px;">
+        <p class="titulo_contenido">Registro de evento</p>
+    </mat-card>
+    <mat-card *ngIf="!enProceso" class="card-margin">
+        <div>
+            <form [formGroup]="tipoRegistroFormGroup" (ngSubmit)="registrarEventoExterno(f)" #f="ngForm" style="width: 100%;">
+                <div style="display: block;">
+
+                    <div class="camposGrid">
+
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Tipo de asistente</mat-label>
+                            <mat-select formControlName="tipoAsistente">
+                                <mat-option [value]="asistente.strId" *ngFor="let asistente of listTipoAsistente">
+                                    {{asistente.strDescripcion}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'tipoAsistente', 'required')">
+                                Seleccione su tipo de asistente
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" id="nombre">
+                            <mat-label>Nombre</mat-label>
+                            <input type="text" matInput maxlength="100" formControlName="nombre" placeholder="Nombre">   
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'nombre', 'required')">
+                                Ingrese su nombre
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" id="apellidoP">
+                            <mat-label>Apellido paterno</mat-label>
+                            <input type="text" matInput maxlength="100" formControlName="apellidoP" placeholder="Apellido paterno">   
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'apellidoP', 'required')">
+                                ingrese su apellido paterno
+                            </mat-error>
+                        </mat-form-field>   
+                        
+                        <mat-form-field appearance="outline" id="apellidoM">
+                            <mat-label>Apellido materno</mat-label>
+                            <input type="text" matInput maxlength="100" formControlName="apellidoM" placeholder="Apellido materno">   
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'apellidoM', 'required')">
+                                ingrese su apellido materno
+                            </mat-error>
+                        </mat-form-field>   
+
+                        <!--CAMPOS DINAMICOS-->
+                        <mat-form-field *ngIf="esAsistente" appearance="outline" id="cct">
+                            <mat-label>Clave del centro de trabajo</mat-label>
+                            <input type="text" matInput maxlength="100" formControlName="cct" placeholder="Clave del centro de trabajo">   
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'cct', 'required')">
+                                Ingrese la clave del centro de trabajo
+                            </mat-error>
+                        </mat-form-field>
+                        
+                        <mat-form-field *ngIf="esAsistente" appearance="outline" id="puesto">
+                            <mat-label>Puesto de trabajo</mat-label>
+                            <input type="text" matInput maxlength="100" formControlName="puesto" placeholder="Puesto de trabajo">   
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'puesto', 'required')">
+                                Ingrese su puesto de trabajo
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="!esAsistente && idAsistente!=0" appearance="outline" id="nombreCurso">
+                            <mat-label>Nombre del curso a impartir</mat-label>
+                            <input type="text" matInput maxlength="100" formControlName="nombreCurso" placeholder="Nombre del curso">   
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'nombreCurso', 'required')">
+                                Ingrese el nombre del curso
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!--CAMPOS DINAMICOS-->
+                        <mat-form-field appearance="outline" id="curp">
+                            <mat-label>CURP</mat-label>
+                            <input type="text" matInput maxlength="18" formControlName="curp" placeholder="CURP" (input)="toUpperCase($event)">
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup, 'curp', 'required')">
+                                Ingrese su CURP
+                            </mat-error>
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup, 'curp', 'invalidCurp')">
+                                Formato de CURP no válido
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" id="correo">
+                            <mat-label>Correo</mat-label>
+                            <input matInput maxlength="200"
+                            formControlName="correo"
+                            placeholder="Ingrese un correo electrónico"
+                            type="email" (input)="validarCorreo($event)">
+                            <mat-error *ngIf="revisarError(tipoRegistroFormGroup,'correo', 'required')">
+                                El correo es requerido</mat-error>  
+                                <mat-error *ngIf="tipoRegistroFormGroup.get('correo')?.hasError('email')">
+                                    El correo es inválido</mat-error>
+                                <mat-error *ngIf="tipoRegistroFormGroup.get('correo')?.hasError('incorrecto')">
+                                    El correo es incorrecto</mat-error>           
+                        </mat-form-field>
+
+                        <div class="img-load">
+                            <button mat-fab color="primary" 
+                            type="button"
+                            aria-label="Example icon button with a delete icon"
+                            [matTooltip]="selectedImage?'Seleccionar nueva foto':'Seleccionar foto de mis archivos'"
+                            matTooltip=""
+                            (click)="triggerFileInput('files')">
+                                <mat-icon>{{selectedImage?'image_search':'add_photo_alternate'}}</mat-icon>
+                            </button>
+
+                            <button mat-fab color="primary" 
+                            *ngIf="esDispositivoMovil"
+                            type="button"
+                            aria-label="Example icon button with a delete icon"
+                            [matTooltip]="selectedImage?'Nueva foto':'Tomar foto'"
+                            (click)="triggerFileInput('camera')">
+                                <mat-icon>{{selectedImage?'cached':'camera_alt'}}</mat-icon>
+                            </button>
+
+                            <button mat-fab color="primary" 
+                            *ngIf="!esDispositivoMovil"
+                            type="button"
+                            aria-label="Example icon button with a delete icon"
+                            [matTooltip]="selectedImage?'Nueva foto':'Abrir cámara web'"
+                            (click)="openWebcam()">
+                                <mat-icon>{{selectedImage?'cached':'camera_alt'}}</mat-icon>
+                            </button>                           
+                        </div>
+                        <!-- Inputs de archivo ocultos -->
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden #fileInput>
+                        <input type="file" id="cameraInput" (change)="onFileSelected($event)" accept="image/*" capture="camera" hidden #cameraInput>                      
+                    </div>
+                    
+                    <div *ngIf="selectedImage" class="vista-previa">
+                        <h3 style="margin: 0px;">Vista previa:</h3>
+                        <img [src]="selectedImage" alt="Vista previa de la imagen" width="300">
+                    </div>
+
+                    <mat-card-actions
+                        [style]="esDispositivoMovil?'display: grid; grid-template-columns: repeat(1, 1fr); padding: 10px; row-gap: 10px; justify-content: center; align-items: center;':'display: flex; justify-content: right; align-items: center; padding: 0px; margin: 0px;'">                        
+                        <button mat-flat-button color="primary"
+                            type="submit"
+                            matTooltip="Enviar registro" 
+                            matTooltipPosition="above">
+                            Registro <mat-icon>search</mat-icon>
+                        </button>
+                        
+                    </mat-card-actions>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="enProceso" class="card-margin">
+        <h2>
+            Por favor de clic al enlace enviado a su correo electrónico para validar su 
+            registro, y a continuación de clic en continuar.
+        </h2>
+        <h2>
+            Si ya realizó este proceso, de clic en continuar
+        </h2>
+        <mat-card-actions
+            class="actions">
+            <button mat-flat-button color="primary" type="button" matTooltip="QR" matTooltipPosition="above"
+            (click)="QRTest()">
+                Leer QR code
+            </button>  
+
+            <button mat-flat-button color="primary" type="button" matTooltip="Regresar" matTooltipPosition="above"
+            (click)="regresar()">
+                Regresar al registro
+            </button>    
+            
+            <button mat-flat-button color="primary" type="button" matTooltip="Continuar" matTooltipPosition="above"
+            (click)="continuar()">
+                Continuar
+            </button>                    
+        </mat-card-actions>
+    </mat-card>
+</mat-card>
+
+

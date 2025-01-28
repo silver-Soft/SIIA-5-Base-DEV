@@ -23,8 +23,8 @@ constructor(
       return true;
     }
     
-    this._notificationService.pushAlert('¡Su sesión ha expirado. Inicie sesión para hacer uso del sistema!')
-    this._router.navigate(['login']);
+    //this._notificationService.pushAlert('¡Su sesión ha expirado. Inicie sesión para hacer uso del sistema!')    
+    this._router.navigate(['registrarse']);
     
     return false;
   }
