@@ -11,48 +11,7 @@ h1 {
   margin: 0;
   padding: 0;
 }
-.custom-form {
-  /* min-width: 300px; */
-  max-width: 30%;
-  margin: 0px auto;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 1rem 2rem;
-  margin: auto;
-  border-radius: 2.5rem;
-  background-color: #fff;
-  color: black;
-  margin-top: 3rem;
-  box-shadow: 13px 13px 20px #cbced1;
-  margin: 0px auto;
-}
-.custom-form input {
-  display: block;
-  margin: 1rem 0;
-  width: 100%;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  border: none;
-  box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
-      rgba(0, 0, 0, 0.1);
-  border: 0 none;
-  background: #E2E2E2;
-}
-.custom-form button {
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  border: none;
-  font-size: 0.875rem;
-  color: #ffffff;
-  font-weight: bold;
-  background-color: #435cc8;
-  width: 100%;
-  display: block;
-  padding: 0.875rem 1rem;
-  margin-top: 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
-  cursor: pointer;
-}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -63,64 +22,6 @@ width: 100%;
 th.mat-sort-header-sorted {
 color: black;
 }
-
-/* Flex */
-
-.flex{
-display: flex;
-justify-content: space-between;
-padding-top: 1.5rem;
-padding-right: 1rem;
-padding-left: 1rem;
-}
-
-.flex-user{
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.flex-ecommerce{
-display: flex;
-align-items: baseline;
-gap: 15px;
-}
-
-/* Botones */
-.button-primary-2726c{
-background-color: #435cc8 !important;
-color: #FFF;
-}
-
-.boton-primary-1787c{
-background-color: #fa364a;
-color: #FFF;
-}
-
-.boton-cancel{
-background-color: #6e7881;
-color: #FFF;
-}
-
-.color-icon-background{
-background-color: #435cc8;
-color: #FFF;
-}
-
-/* color */
-.primary-2726c{
-color: #435cc8;
-}
-.primary-1787c{
-color: #fa364a;
-}
-
-/* Style font */
-
-.font-small{
-font-size: small;
-}
-
 /**
 * Generated theme by Material Theme Generator
 * https://materialtheme.arcsine.dev
@@ -2263,35 +2164,6 @@ color: white;
 color: var(--primary-color) !important;
 }
 
-/*Alerts */
-
-.alert {
-  padding: 20px;
-  background-color:#ed4f32;
-  color: black;
-  margin-bottom: 15px;
-  border-radius: 10px;
-}
-
-.alert.success {background-color: #15CD72;}
-.alert.info {background-color: #51BCF7;}
-.alert.warning {background-color: #ede04d;}
-
-.closebtn {
-  margin-left: 15px;
-  color: black;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
-}
-
 /*GLOBALES DE COMPONENTES --> Botones, cards, contenedores, formularios etc.*/
 .container {
 max-width: min(100%, 1200px);
@@ -2302,12 +2174,6 @@ padding: 0px;
 .card-margin {
 margin: 10px 10px 10px 10px;
 padding: 10px 10px 10px 10px;
-}
-.mdc-card {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding: 20px;
 }
 .padding {
 padding: 10px 10px 10px 10px;
@@ -2326,154 +2192,15 @@ margin-top: 30px;
 padding:.5rem 1rem .5rem 1rem;
 font-size: 1.3rem;
 }
-.titulo_MatCard{
-padding:0px; 
-margin:0px;   
-}
-.botonOpcion{/*Botones-Hover*/ 
-height: fit-content;
-border-radius: 3px;
-justify-content: center;
-align-items: center;
-text-align: center;
-cursor: pointer;
-margin-bottom: 10px; 
-transition: all 0.25s; 
-}
-.botonOpcion p{
-color:#fa364a;
-font-size: medium;
-margin: 2px 2px 2px 2px;
-}
-.botonOpcion button{
-background-color: white;
-padding:0;
-width: 100%;
-}
-.botonOpcion button mat-icon{
-margin-bottom: 1rem;
-}
-.botonOpcion a{
-background-color: white;
-padding:0;
-width: 100%;
-}
-.botonOpcion a mat-icon{
-margin-bottom: 1rem;
-}
-.botonOpcion:hover{
-/*border: 2px solid;
-border-color: #fa364a;*/
-transform: translateY(-10px);
-box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
-}
 .img-responsive {
 width: 100%;
 height: auto;
 }
 
-
-/*REGISTRO DE ASPIRANTES*/
-
-/*EXAMEN DE ADMISION ************************************************************/
-/*Examen Opciones ⬇⬇⬇⬇*/
-.alinearGrid{
-padding-top: 2rem;
-padding-bottom: 1rem;
-display: grid;
-grid-template-columns: repeat(2,1fr);
-column-gap: 1rem;    
-justify-items: center;
-} 
-.icono{
-font-size:xx-large;  
-margin-bottom: 5px;  
-} 
-/*Inicio Reglas examen ⬇⬇⬇⬇*/ 
-.imgReglas{
-display: flex;
-justify-content: center;  
-}
-.gridReglas{
-padding-top: 1rem;
-display: grid;
-grid-template-columns: repeat(1,1fr);
-column-gap: 1rem;
-align-items: center;
-text-align: center; 
-justify-content: center;
-}
-.centrarCelda{
-width: fit-content;
-margin: 0 auto;
-}
-
-/*Examen ⬇⬇⬇⬇*/ 
 .card-margin .container{
 height:fit-content;
 padding: 5px 5px 5px 5px;
 width: 100%;       
-}
-.encabezadoSeccion{
-padding-top: 1rem;
-display: grid;
-grid-template-columns: repeat(2,1fr);
-column-gap: 2rem;
-text-align: left; 
-justify-content: left;
-}
-.encabezadoSeccion p{
-margin-top:0px;
-}
-.nombre_modulo{  
-font-weight: bold;
-font-size: 20px;
-}
-.preguntaTitulo{
-font-size: 15px;
-font-weight: normal;
-}
-.separator{
-margin-top:5px;
-}
-.imagenPregunta{
-display: flex;
-justify-content: center;
-}
-.imagenPregunta img{
-width: 70%;
-height: 70%;
-}
-.hide-Submit{
-display: none;
-}
-
-/*Examen Fin ⬇⬇⬇⬇*/
-.mensaje{
-font-size:larger;
-font-weight: normal;
-font-stretch: semi-expanded;
-text-align: justify;
-}
-
-/*Examen Avance ⬇⬇⬇⬇*/
-.encabezadoSeccionAvance{
-background: #9cddee59;
-border-radius: 5px;
-width: 100%;
-padding-top: 1rem;
-display: grid;
-grid-template-columns: repeat(2,1fr);
-column-gap: 2rem;
-text-align: left; 
-justify-content: left;
-}
-.encabezadoSeccionAvance span{
-font-weight: bolder;
-}
-.encabezadoSeccionAvance p{
-margin-top:0px;
-padding-left: 20px;
 }
 .aviso{
 border-radius: 5px;
@@ -2489,9 +2216,6 @@ text-align: center;
 margin: 0 auto;
 font-size: 80px;
 }
-/*.iconoMensaje mat-icon{  
-
-}*/
 .aviso_Mensaje{
 padding-top: 1rem;
 display: grid;
@@ -2520,95 +2244,13 @@ width: auto;
   text-align:center;
 }
 
-/*EXAMEN OPCIONES*/
-.alinearGrid{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  display: grid;
-  grid-template-columns: repeat(1,1fr);
-  grid-template-rows: auto;           
-  justify-items: center;
-}   
-
-/*INICIO REGLAS EXAMEN*/
-.imgReglas img{
-  height: 180px;
-  width: 280px;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.gridReglas{
-    padding-top: 1rem;
-    display: block;
-    align-items: center;
-    text-align: center;    
-}
-
-/*EXAMEN*/
-.encabezadoSeccion{
-  padding:0px;
-} 
-.encabezadoSeccion p{
-    font-size:10px;
-}
 .card-margin {
     margin: 5px 5px 5px 5px;
     padding:0px;
 }
 .card-margin .container{        
     padding:0px;
-}    
-.nombre_modulo{
-    font-size: 15px;
-}
-.imagenPregunta img{
-  width: 100%;
-  height: 100%;
-}
-.opciones{
-  width: 100%;  
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 5px;      
-  text-align: right;
-}
-
-/*EXAMEN AVANCE*/
-.encabezadoSeccionAvance{
-  background: #9cddee59;
-  border-radius: 5px;
-  width: 100%;
-  padding-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  column-gap: 1rem;
-  text-align: left; 
-  justify-content: left;
-}
-.encabezadoSeccionAvance p{
-  font-size: small;
-  padding-left: 5px;
-}
-.aviso_Mensaje{
-  padding-top: 1rem;
-  display: block;
-  text-align: center; 
-  justify-content: center;
-}
-.iconoMensaje{  
-text-align: center;
-margin: 0 auto;
-}
-.iconoMensaje mat-icon{  
-font-size: 60px;
-width: 100%;
-height:100%;  
-}
-.aviso_Mensaje p{
-  text-align: center;
-}
+}  
 }
 .flex-center{
 display:flex;
