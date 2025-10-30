@@ -56,9 +56,10 @@ export class NotificationService {
         
       }else if(result.isDismissed){
         
-      }
+      } 
     }) 
   }
+  
   public pushAlert(title:any){
     const Toast = Swal.mixin({
       toast: true,
@@ -127,17 +128,6 @@ export class NotificationService {
         
       }
     }) 
-  }
-  public pushMsjResponse(notificationMessages: Array<any>) {
-      
-    if (notificationMessages !== undefined && notificationMessages !== null) {
-      
-      notificationMessages.forEach(element => {
-        const severity = AppSettings.getTypeMessageByCodeSeverity(element.severity);
-        
-        this.pushInfo(new Notification(element.message, severity));
-      });
-    }
   }
 
   public pedirConfirmacion(titulo:string, contenido:string){

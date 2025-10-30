@@ -61,8 +61,8 @@ import { SafeUrlPipe } from './modules/componentes/core/pipes/safe-url.pipe';
 import { LoginComponent } from './modules/componentes/login/login.component'; 
 import { HomeComponent } from './modules/componentes/home/home.component'; 
 import { AvisoDatosPersonalesDialogComponent } from './modules/componentes/modal-dialogs/aviso-datos-personales-dialog/aviso-datos-personales-dialog.component'; 
-import { VisorArchivoModalComponent } from './modules/componentes/modal-dialogs/visor-archivo-modal/visor-archivo-modal.component';
 import { AvisosComponent } from './modules/componentes/modal-dialogs/home/avisos/avisos.component';
+import { AdminNotificacionesComponent } from './modules/componentes/admin-notificaciones/admin-notificaciones.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +75,8 @@ import { AvisosComponent } from './modules/componentes/modal-dialogs/home/avisos
     LoginComponent,
     HomeComponent,
     AvisoDatosPersonalesDialogComponent,
-    VisorArchivoModalComponent,
     AvisosComponent,
+    AdminNotificacionesComponent,
   ],
   imports: [
     BrowserModule, 
@@ -105,7 +105,6 @@ import { AvisosComponent } from './modules/componentes/modal-dialogs/home/avisos
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    //NgxMomentDateModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatStepperModule,

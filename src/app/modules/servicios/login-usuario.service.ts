@@ -64,7 +64,6 @@ export class LoginUsuarioService {
         this._notificationService.pushError(this._translate.instant('template.notificaciones.error.solicitudNoAutorizada'));
       } else {
         this._notificationService.pushError(this._translate.instant('template.notificaciones.error.intentaloMasTarde'));
-        this._notificationService.pushMsjResponse(error.error.lstMensajes);
       }
     }
 
