@@ -213,7 +213,7 @@ export class AdminNotificacionesComponent {
       "apMaterno": "Romano",
       "nombreCompleto": "Silvestre López Romano",
       "matricula": "A004",
-      "targetToken": "fEkB5Jc-QHyD6GaTp093q7:APA91bGrBksCScUDq5-AWaXbzuUD7dWlK1J1yt-kXkzucrR4YT1-nS_9T9PeSBsKGkvC_Ub8jKEcanUQOfVxNCyJaqJ2hQLPNwdYfoJR509jrN1VYclxCQU"
+      "targetToken": "fq40GuKFT4SPoEqtSSOt8s:APA91bEjwYPjGKq9n2lOQQvcOWLiKaSi-MrupJHpOY2arUthkr5CHHLTZWkN0HJLB0y_zbrFJd73Mu8Sb8RLnSl5VvTZGPuNhNW9J8HG4RujsZukaSCjI_E"
     },
     {
       "nombre": "Juan António",
@@ -228,13 +228,9 @@ export class AdminNotificacionesComponent {
   //Temas ya existentes en FCM de prueba
   topics = [
     {
-      targetTopic: "notificaciones_alumnos",
-      topic: "Todos los estudiantes"
-    },
-    {
-      targetTopic: "notificaciones_empleados",
-      topic: "Todos los empleados y académicos"
-    },
+      targetTopic: "test_notificaciones",
+      topic: "Integrantes de la MIS"
+    }
   ];
 
 
