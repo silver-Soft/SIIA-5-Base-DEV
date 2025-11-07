@@ -38,17 +38,7 @@ export class FirebaseMessagingService {
         );
       }
 
-      sendGlobal(body:any) {                
-        return this.https.post(
-          AppSettings.API_ENDPOINT_FCM + '/api/v1/notifications/send/global',
-          body,{ }
-        ).pipe(
-          catchError(error => {
-            console.log(error);
-            return this.handleError(error);
-          })
-        );
-      }
+      
       
       protected handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {

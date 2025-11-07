@@ -132,7 +132,8 @@ export class AdminNotificacionesComponent {
       console.log("Payload a enviar: ", JSON.stringify(payload));
 
       if (this.tipoNotificacion === 'global') {
-        this.sendGlobal(payload);
+        payload.targetTopic = "test_notificaciones";
+        this.sendToTopic(payload);//El servicio de envío global ya esta en producción, usamos el topic de prueba.
       } 
       else if (this.tipoNotificacion === 'grupo') {
         this.sendToTopic(payload);
@@ -145,17 +146,7 @@ export class AdminNotificacionesComponent {
     }
   }
 
-  sendGlobal(payload: any) {
-    this.fcmService.sendGlobal(payload).subscribe({
-      next: data => {
-        console.log("Respuesta del servicio FCM: ", data);
-        this.notificacionesService.pushSuccess('Notificación general enviada correctamente.');
-      },
-      error: error => {
-        this.notificacionesService.pushError("ha ocurrido un error, vuelva a intentarlo más tarde")
-      }
-    });
-  }
+  
 
   sendToTopic(payload: any) {
     this.fcmService.sendToTopic(payload).subscribe({
@@ -181,7 +172,7 @@ export class AdminNotificacionesComponent {
   }
 
   //Lista de alumnos de prueba con [targetToken] -> Este se debe obtener de la DB, Esta en proceso..
-  //Puedes obtener el targetToken al logearte en la app movil y revisar el Logcat de Android Studio, buscando la salida TOKEN
+  //Puedes obtener el targetToken al logearte en la app movil y revisar el Logcat de Android Studio, buscando la salida TOKEN LOGIN
   alumnos = [
     {
       "nombre": "Ubaldo",
@@ -213,7 +204,7 @@ export class AdminNotificacionesComponent {
       "apMaterno": "Romano",
       "nombreCompleto": "Silvestre López Romano",
       "matricula": "A004",
-      "targetToken": "fq40GuKFT4SPoEqtSSOt8s:APA91bEjwYPjGKq9n2lOQQvcOWLiKaSi-MrupJHpOY2arUthkr5CHHLTZWkN0HJLB0y_zbrFJd73Mu8Sb8RLnSl5VvTZGPuNhNW9J8HG4RujsZukaSCjI_E"
+      "targetToken": "cNcplT3kT8Gwwtq9Z-IvgT:APA91bGQIF7eh2z01bfy4Wn6zSkAwVVgaf1FGY9pq8WIJ8o2L9AuLhfM-hU87AlDGC7QZ9NmT4hpN962vouN2OoWE1HUTJljF1LczslBhMb-aZskDY1eQUU"
     },
     {
       "nombre": "Juan António",
