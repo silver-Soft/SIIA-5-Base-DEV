@@ -16,7 +16,7 @@ export class FirebaseMessagingService {
     
       sendToTopic(body:any) {                
         return this.https.post(
-          AppSettings.API_ENDPOINT_FCM + '/send/topic',
+          AppSettings.API_ENDPOINT_FCM + '/api/v1/notifications/send/topic',
           body,{ }
         ).pipe(
           catchError(error => {
@@ -28,7 +28,7 @@ export class FirebaseMessagingService {
 
       sendToToken(body:any) {                
         return this.https.post(
-          AppSettings.API_ENDPOINT_FCM + '/send/token',
+          AppSettings.API_ENDPOINT_FCM + '/api/v1/notifications/send/token',
           body,{ }
         ).pipe(
           catchError(error => {
@@ -40,7 +40,7 @@ export class FirebaseMessagingService {
 
       sendGlobal(body:any) {                
         return this.https.post(
-          AppSettings.API_ENDPOINT_FCM + '/send/global',
+          AppSettings.API_ENDPOINT_FCM + '/api/v1/notifications/send/global',
           body,{ }
         ).pipe(
           catchError(error => {
